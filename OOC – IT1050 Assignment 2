@@ -8,8 +8,6 @@
 #define BILLPAYMENT_H
 
 #include "Payment.h"
-
-
 class BillPayment : public Payment
 {
 private:

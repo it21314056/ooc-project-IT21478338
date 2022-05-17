@@ -2,7 +2,7 @@
 //M.A.M Ashik
 //Indivudal Contribution class [ 01- CLASS : BILL PAYMENT]
 
---Payment.h--
+--BillPayment.h--
 
 #ifndef BILLPAYMENT_H
 #define BILLPAYMENT_H
@@ -32,7 +32,7 @@ void confirmPayment();
 
 #endif
 
---Payment.cpp--
+--BillPayment.cpp--
 
 #include <iostream>
 #include <cstring>
@@ -74,7 +74,7 @@ BillPayment::~BillPayment(){
 //M.A.M Ashik
 //Indivudal Contribution class [ 02- CLASS : LOAN PAYMENT]
 
---Payment.h--
+--LoanPayment.h--
 
 #include "Payment.h"
 using namespace std;
@@ -98,7 +98,7 @@ class LoanPayment : public Payment
 
 };
 
---Payment.cpp--
+--LoanPayment.cpp--
 
 #include <iostream>
 #include <cstring>
@@ -134,26 +134,3 @@ LoanPayment::~LoanPayment(){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---Payment.h--
---Payment.h--

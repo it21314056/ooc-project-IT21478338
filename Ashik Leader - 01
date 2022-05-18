@@ -1,0 +1,188 @@
+//M.A.M Ashik-[Leader]
+//IT21478338
+//Individual Entities = [Payment, Loan Payment, Bill Payment]
+
+/////////////////////////////CLASS.H FILES
+//01-Payment.h
+
+class Payment
+{
+	protected : 
+	         char PayType[10];
+	         double TotalAmount;
+	         char PayMethod[10];
+	         
+	         MonthlyReport *Mreport; //Bi-Directional
+	         
+	public :
+			   Payment();
+			 Payment(const char P_Paytype[],double tol_Amount, const char P_method[],MonthlyReport *P_Mreport);
+			 void calAmount();
+			 void paymentDetails();
+			   ~Payment();
+};
+
+//02-BillPayment.h
+
+#ifndef BILLPAYMENT_H
+#define BILLPAYMENT_H
+
+#include "Payment.h"
+class BillPayment : public Payment
+{
+private:
+        int RefNo;
+        char Type[20];
+        double Amount;
+        char Date[10];
+  
+public: 
+ 	   BillPayment();
+ 	BillPayment(int pRefNo,const char B_Type[],double B_Amount, const char B_Date[10]);
+	void setBillPayment(int pRefNo, const char B_Type[], double B_Amount,const char B_Date[10]);
+	void checkPayment();
+	void confirmPayment();
+    ~BillPayment();
+ 
+};
+#endif
+
+//03-LoanPayment.h
+
+#include "Payment.h"
+using namespace std;
+
+class LoanPayment : public Payment
+{
+	private : 
+	    char LRef_no[5];
+			double Balance[10];
+			int intrest;
+			char p_date[10];
+			
+	public:
+		  LoanPayment();
+		  LoanPayment(const char pLRef_no[],double Lbalance, int Lintrest,const char Lp_date[]);
+		  
+		  void SchedulePayDetails(const char pLRef_no[],double Lbalance, int Lintrest,const char Lp_date[]);
+		  void Calbalance();
+		  void UpdatePayment();
+		    ~LoanPayment();
+};
+
+/////////////////////////////CLASS.CPP FILES
+
+//01-Payment.cpp
+
+#include <iostream>
+#include <cstring>
+#include "Payment.h"
+using namespace std;
+
+Payment :: Payment()
+{
+	strcpy(PayType,"");
+	TotalAmount = 0;
+	strcpy(PayMethod,"");
+}
+Payment :: Payment(const char P_Paytype[],double tol_Amount, const char P_method[],MonthlyReport *P_Mreport)
+{
+	PayType = P_Paytype;
+	TotalAmount = tol_Amount;
+	PayMethod = P_method;
+	Mreport = P_Mreport; //Bi-Directional
+}
+void Payment :: calAmount()
+{
+	tol_Amount = BillPay + LoanPay;
+	cout << "Total Payment Amount : " << tol_Amount << endl;
+}
+void Payment :: paymentDetails()
+{
+	
+}
+~Payment()
+{
+	cout << "Destructor runs" << endl;
+}
+
+
+//02-BillPayment.cpp
+
+#include <iostream>
+#include <cstring>
+#include "Payment.h"
+#include "BillPayment.h"
+using namespace std;
+
+BillPayment:: BillPayment()
+{
+ RefNo= 0;
+ strcpy(Type, "");
+ Amount = 0;
+ strcpy(Date,"")
+}
+
+BillPayment::BillPayment(int pRefNo, const char B_Type[], double B_Amount,const char B_Date[10])
+{
+ RefNo = pRefNo;
+ strcpy(Type, B_Type);
+ Amount = B_Amount;
+ strcpy(Date,B_Date);
+}
+BillPayment::setBillPayment(int pRefNo, const char B_Type[], double B_Amount,const char B_Date[10])
+{
+	
+}
+void BillPayment::checkPayment()
+{
+  
+}
+
+void BillPayment::confirmPayment()
+{
+  
+}
+
+BillPayment::~BillPayment()
+{
+cout << "Destructor runs" << endl;
+}
+
+
+//03-LoanPayment.cpp
+
+#include <iostream>
+#include <cstring>
+#include "LoanPayment.h"
+LoanPayment :: LoanPayment()
+{
+	strcpy(LRef,"");
+	Balance = 0;
+	intrest = 0;
+	strcpy(p_date,"")
+}
+
+LoanPayment :: SchedulePayDetails(const char pLRef_no[],double Lbalance, int Lintrest,const char Lp_date[])
+{
+	strcpy(LRef_no,pLRef_no);
+	Balance = LBalance;
+	intrest = Lintrest;
+	strcpy(p_date,Lp_date);
+}
+
+void LoanPayment :: Calbalance()
+{
+	
+}
+
+void LoanPayment :: UpdatePayment()
+{
+	cout << " Loan Referance No: " << LRef << endl;
+	cout << " Balance: " << Balance << endl;
+}
+
+LoanPayment::~LoanPayment()
+{
+cout << "Destructor runs" << endl;
+}

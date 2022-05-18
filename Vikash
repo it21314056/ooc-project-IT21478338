@@ -1,0 +1,139 @@
+// IT21436376
+// Vikash R. Dharmaratne
+// Individual Entities = [Complaints, Employee]
+
+//01-Complains.h
+
+class Complains
+{
+	private:
+		 int TicketNo;
+		 char subject[30];
+		 char C_Date[10];
+		 char Desription[100];
+		 
+		 Customer *cus; //Bi-Directional
+		 Employee *Emp[size]; //Bi-Directional
+		 
+	public:
+		Complains();
+		Complains(int Tkt_No,const char Csubject[],const char Cdate[], const char Cdesription[],Customer *cust);
+		void Create();
+		void Assign();
+		void Update(Employee *Emp1);
+		~Complains();
+	
+};
+
+
+//01-Complains.cpp
+
+#include <iostream>
+#include <cstring>
+#include "Complains.h"
+using namespace std;
+
+Complains :: Complains()
+{
+	TicketNo = 0;
+	strcpy(subject,"");
+	strcpy(C_Date,"");
+	strcpy(Desription,"");
+	
+}
+Complains :: Complains(int Tkt_No,const char Csubject[],const char Cdate[], const char Cdesription[],Customer *cust)
+{
+	TicketNo = Tkt_No;
+	subject = Csubject;
+	C_Date = Cdate;
+	Desription = Cdesription;
+	cus = cust;   //Bi-Directional
+}
+void Complains :: Create()
+{
+	
+}
+void Complains :: Assign()
+{
+	
+}
+void Complains :: Update(Employee *Emp1)
+{
+	//Bi-Directional
+}
+~Complains()
+{
+   cout << "Destructor runs" << endl;	
+}
+
+
+//02- Employee.h
+
+class Employee
+{
+private:
+ 	int EmpID;
+ 	char EmpName[20];
+ 	char EmpEmail[20];
+ 	char EmpNumber[10];
+ 	char EmpUsername[20];
+ 	char EmpPassword[20];
+ 
+ 	Complains * Com; //Bi-Directional
+ 
+public:
+ Employee();
+ Employee(int pEmpID, const char pEmpName[], const charpEmpEmail[], const char pEmpNumber[], const charpEmpUsername[], const char pEmpfPassword[]);
+ void login(const char EmpUsername[], const char EmpPsword[] );
+ void ConfirmComplains( );
+ void addDetails(Account *A);  //Dependency
+  ~Employee();
+};
+
+
+
+//02- Employee.cpp
+
+#include <iostream>
+#include <cstring>
+#include "Employee.h"
+using namespace std;
+
+Employee::Employee()
+{
+ EmpID = 0;
+ strcpy(EmpName, "");
+ strcpy(EmpEmail, "");
+ strcpy(EmpNumber, "0000000000");
+ strcpy(EmpUsername, "");
+ strcpy(EmpPassword, "");
+}
+
+Employee::Employee(int pEmpID, const char pEmpName[], const char pEmpEmail[], const char pEmpNumber[], const char pEmpUsername[], const char pEmpPassword[])
+{
+ EmpID = pEmpID;
+ strcpy(EmpName, pEmpName);
+ strcpy(EmpEmail, pEmpEmail);
+ strcpy(EmpNumber, pEmpNumber);
+ strcpy(EmpUsername, pEmpUsername);
+ strcpy(EmpPassword, pEmpPassword);
+}
+void Employee::login(const char EmpUsername[], const char EmpPsword[])
+{
+	
+}
+void Employee::ConfirmComplains(Complains * ECom) 
+{
+	
+}
+void Employee::addDetails(int Acc,Account *A)
+{
+	//Dependency
+	No_OfAccount = Acc * P->viweAccount();
+
+}
+~Employee()
+{
+	cout << "Destructor runs" << endl;
+}
+

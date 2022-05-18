@@ -1,1 +1,209 @@
+//IT21314056
+//M.K.B.Udara
+//Individual Entities = (Account, Transection, MonthlyReport)
+
+//01- Account.h
+
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+class Account
+{
+	private:
+		int Acc_no;
+		char Type[20];
+		char Opendate[10];
+		
+		MonthlyReport *Mreport[1];     //Composition
+	    Transection *trans[size];        //Bi-Directional
+	    
+	    
+	public :
+		Account();
+		Account(int accNo,const char AccType[],const char AccOpendate[]);
+		void viweAccount()
+		void addTransection(Transection *trans);
+		~Account();
+	    
+};
+
+//02- Transection.h
+
+class Transection
+ {
+ 	private :
+ 		 int TranID;
+ 		 char Time;
+ 		 char T_Date;
+ 		 double Amount;
+ 		 
+ 		 Customer *cus;  //Bi-Directional
+ 		 
+ 	public :
+ 		 Transection();
+ 		 Transection(int pTranID,const char pTime,const char pT_Date,double pAmount,Customer *Cus);
+ 		 Void TransectionDetail();
+ 		 Void CalTransection();
+ 		 Void ConfirmTransection();
+ 		 ~Transection();
+ 	
+ };
+
+
+
+
+
+
+//03- MonthlyReport.h
+
+class MonthlyReport
+{
+	private:
+		  int R_ID;
+		  double Balance;
+		  char Desription[100];
+		  char R_Date[10];
+		  
+		  Payment *pay[SIZE];//Bi-Directional
+
+	public:
+	      MonthlyReport();
+		  MonthlyReport(int Rid,double M_Balance,const char Mdesription[],const char Rdate[]);
+		  void MonthlyReportDetails();
+		  void PaymentDetails(Payment *P);
+		  ~MonthlyReport();
+		  
+};
+
+//01- Account.cpp
+
+#include <iostream>
+#include <cstring>
+#include "Customer.h"
+#include "Account.h"
+using namespace std;
+ Account :: Account()
+{
+	Acc_no = 0;
+	strcpy(Type,"");
+	strcpy(Opendate,"");
+	Mreport[0] = new  MonthlyReport(102);	
+}
+ Account ::	Account(int accNo,const char AccType[],const char AccOpendate[])
+{
+	Acc_no = accNo;
+	Type = AccType;
+	Opendate = AccOpendate;
+	Mreport[0] = new MonthlyReport(102);
+}
+void Account :: viweAccount()
+{
+	
+	for (int i=0; i< 1; i++)
+		room[i] -> viweMonthlyReport();
+		
+	
+	return Acc_No;
+
+}
+void Account :: addTransection(Transection *trans)
+{
+	
+	
+}
+
+~Account()
+{
+	 //Composition
+  	for(int i = 0; i < 1; i++)
+	 {
+	 	delete Mreport[i];
+	 	cout << "the End" << endl;	
+	}
+	cout << "Destructor runs" << endl;
+}
+
+
+
+//02- Transection.cpp
+
+
+#include <iostream>
+#include <cstring>
+#include "Password.h"
+using namespace std;
+
+Transection :: Transection()
+{
+	TranID = 0;
+	strcpy(Time,"");
+	strcpy(T_Date,"");
+	Amount = 0;
+}
+Transection :: Transection(int pTranID,const char pTime,const char pT_Date,double pAmount,Customer *Cus)
+{
+	TransID = pTranID; 
+	Time = pTime;
+	T_Date = pT_Date;
+	Amount = pAmount;
+	cus = Cus;  //Bi-Directional
+	
+}
+void Transection :: TransectionDetail()
+{
+	
+}
+void Transection :: CalTransection()
+{
+	
+}
+void Transection :: ConfirmTransection()
+{
+	
+}
+~Transection
+{
+  cout << "Destructor runs" << endl;	
+} 
+
+
+
+
+//03- MonthlyReport.cpp
+#include <iostream>
+#include <cstring>
+#include "MonthlyReport.h"
+using namespace std;
+
+MonthlyReport :: MonthlyReport()
+{
+	R_ID = 0;
+	Balance = 0;
+	strcpy(Desription,"");
+	strcpy(R_Date,"");
+	
+}
+MonthlyReport :: MonthlyReport(int Rid,double M_Balance,const char Mdesription[],const char Rdate[])
+{
+	R_ID =Rid;
+	Balance = M_Balance;
+	Desription = Mdesription;
+	R_Date = Rdate;	
+}
+void MonthlyReport :: MonthlyReportDetails()
+{
+	
+}
+void MonthlyReport :: PaymentDetails(Payment *P)
+{
+	//Bi-Directional
+}
+~MonthlyReport()
+{
+	cout << "Destructor runs" << endl;
+}
+
+
 

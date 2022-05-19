@@ -1,0 +1,220 @@
+//S.M.Sujath
+//IY21392108
+//Individual Entities = [Customer, Login, Password]
+
+////////////////////////////////CLASS.H FILES
+//01- Customer.h
+
+#ifndef CUSTOMER_H
+#define CUSTOMER_H
+
+class Customer
+{
+	private:
+            int NIC;
+            char Name[20];
+            char Address[30];
+            char Email[20];
+
+            Account *Acc[size];     //Composition
+            CreditCard *card[1];    //Aggregation
+            Complains * comp[size]; //Bi-Directional
+            Loan * loan[size];      //Bi-Directional
+            Login *log;             //Uni-Directional
+
+	public:
+		   Customer();
+		   Customer(int C_Nic, const char Cname[],const char Caddress[],const char email[],Login *L,int Acc1);
+		   void addcomplains(Complain *com );
+		   void addcard(CreditCard *card1);
+		   void viwedetails();
+           void updatedetails(Loan *Cloan);
+           ~Customer();
+};
+
+#endif 
+
+//02- Login.h
+
+#ifndef LOGIN_H
+#define LOGIN_H
+
+
+class Login
+{
+	private :
+		char Pw_secret_qn[50];
+		char Pw_secret_Ans[20];
+		char Password[10];
+		char Email[20];
+
+		Password *password[size]; //Bi-Directional
+
+	public :
+		Login();
+		Login(const char LPw_secret_qn,const char LPw_secret_Ans,const char LPassword,const char Lemail);
+		void UpdateCustomerDetails();
+		void ConfirmPassword(Password *pass);
+		~Login();
+};
+#endif 
+
+
+
+//03-Password.h
+
+#ifndef PASSWORD_H
+#define PASSWORD_H
+
+class Password
+ {
+ 	private :
+ 		 char Last_Pw;
+ 		 int Acc_No;
+ 		 char Email;
+
+ 		 Login *Log; //Bi-Directional
+
+ 	public :
+ 		Password();
+ 		Password(const char Plast_Pw,int accNo,const char Pemail,Login *log);
+ 		void storePassword();
+ 		void checkPassword();
+ 		~Password();
+ };
+#endif 
+
+//////////////////////////////CLASS.CPP FILES
+
+//01- Customer.cpp
+
+#include <iostream>
+#include <cstring>
+#include "Customer.h"
+using namespace std;
+
+ Customer ::Customer()
+{
+	NIC = 0;
+	strcpy(Name,"");
+	srcpy(Address,"");
+	strcpy(Email, "");
+	Acc[0] = new Account;
+
+}
+
+
+ Customer ::Customer(int C_Nic, const char Cname[],const Caddress[],Login *L,int Acc1)
+{
+	NIC = C_Nic;
+	Name = Cname;
+	Address = Caddress;
+	Email = email;
+	Log = L;
+	card = card1;
+	Acc[0] = new Account;
+}
+void Customer :: addcard(CreditCard *card1)
+{
+	card[0] = card1;
+
+}
+void Customer :: viwedetails()
+{
+
+	for(int i = 0; i < 1; i++){
+	 	card[i] -> viweCreditCard();  //Aggregation
+	}
+	for(int i = 0; i < size; i++){
+	 	Acc[i] -> viweAcount();	 //Composition	
+   }
+}
+void updatedetails(Loan *Cloan)
+{
+
+}
+ ~Customer()
+ {
+ 	//Aggregation
+ 	cout << "Customer shutting down" << endl;
+
+ 	//Composition	
+ 	for(int i = 0; i < size; i++)
+	 {
+	 	delete Acc[i];
+	 	cout << "the End" << endl;
+	  } 
+	  cout << "Destructor runs" << endl;
+ }
+
+
+//02- Login.cpp
+
+#include <iostream>
+#include <cstring>
+#include "Login.h"
+using namespace std;
+
+Login :: Login()
+{
+	strcpy(Pw_secret_qn,"");
+	strcpy(Pw_secret_Ans,"");
+	strcpy(Password, "");
+	strcpy(Email,"");
+}
+Login :: Login(const char LPw_secret_qn,const char LPw_secret_Ans,const char LPassword,const char Lemail)
+{
+	Pw_secret_qn = LPw_secret_qn;
+	Pw_secret_Ans = LPw_secret_Ans;
+	Password = LPassword;
+	Email = Lemail;
+}
+void Login ::ConfirmPassword(Password *pass)
+{
+	//Bi-Directional
+}
+void Login :: UpdateCustomerDetails()
+{
+
+}
+~Login()
+{
+	cout << "Destructor runs" << endl;
+
+}
+
+
+//03-Password.cpp
+
+#include <iostream>
+#include <cstring>
+#include "Password.h"
+using namespace std;
+
+
+ Password :: Password()
+ {
+ 	strcpy(Last_Pw,"");
+ 	Acc_No = 0;
+ 	strcpy(Email,"");
+
+ }
+ Password :: Password(const char Plast_Pw,int accNo,const char Pemail,Login *log)
+ {
+ 	Last_Pw = Plast_Pw;
+ 	Acc_No = accNo;
+ 	Email =Pemail;
+ 	Log = log;
+ }
+ void Password::storePassword()
+ {
+
+ }
+ void Password::checkPassword()
+ {
+
+ }
+ ~Password()
+ {
+ 	cout << "Destructor runs" << endl;
+ }
